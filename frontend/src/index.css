@@ -16,53 +16,68 @@
 @import "./theme.css";
 
 :root {
-  --radius: 0.75rem;
+  --radius: 0.5rem;
 
-  --background: #f6f7f9;
-  --foreground: #101828;
+  --background: #ffffff;
+  --foreground: #222222;
 
   --card: #ffffff;
-  --card-foreground: #101828;
+  --card-foreground: #222222;
   --popover: #ffffff;
-  --popover-foreground: #101828;
+  --popover-foreground: #222222;
 
-  --primary: #4f46e5;
+  --primary: #ff385c;
   --primary-foreground: #ffffff;
 
-  --secondary: #f2f4f7;
-  --secondary-foreground: #101828;
+  --secondary: #f7f7f7;
+  --secondary-foreground: #222222;
 
-  --muted: #f2f4f7;
-  --muted-foreground: #667085;
+  --muted: #f7f7f7;
+  --muted-foreground: #6a6a6a;
 
-  --accent: #f2f4f7;
-  --accent-foreground: #101828;
+  --accent: #f2f2f2;
+  --accent-foreground: #222222;
 
-  --destructive: #dc2626;
+  --destructive: #c13515;
   --destructive-foreground: #ffffff;
 
-  --border: #e4e7ec;
-  --input: #e4e7ec;
-  --ring: #4f46e5;
+  --border: #dddddd;
+  --input: #c1c1c1;
+  --ring: #222222;
 
   /* Chart series. Recharts reads these through the shadcn Chart component, so a
      dashboard inherits the app's palette instead of library defaults. */
-  --chart-1: #4f46e5;
+  --chart-1: #ff385c;
   --chart-2: #16a34a;
   --chart-3: #d97706;
   --chart-4: #2563eb;
   --chart-5: #db2777;
 
   --sidebar: #ffffff;
-  --sidebar-foreground: #101828;
-  --sidebar-primary: #4f46e5;
+  --sidebar-foreground: #222222;
+  --sidebar-primary: #ff385c;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f2f4f7;
-  --sidebar-accent-foreground: #101828;
-  --sidebar-border: #e4e7ec;
-  --sidebar-ring: #4f46e5;
+  --sidebar-accent: #f7f7f7;
+  --sidebar-accent-foreground: #222222;
+  --sidebar-border: #dddddd;
+  --sidebar-ring: #222222;
 
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: "Sofia Sans", sans-serif;
+  --primary-active: #e00b41;
+  --primary-disabled: #ffd1da;
+  --body: #3f3f3f;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-base: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+  --space-section: 64px;
+  --container: min(1120px, calc(100% - 48px));
+  --display-xl: clamp(24px, 3vw, 28px);
+  --display-lg: clamp(20px, 2.5vw, 22px);
+  --rating-display: clamp(48px, 8vw, 64px);
 }
 
 .dark {
@@ -74,8 +89,8 @@
   --popover: #14171f;
   --popover-foreground: #f7f8f8;
 
-  --primary: #818cf8;
-  --primary-foreground: #0b0d12;
+  --primary: #ff385c;
+  --primary-foreground: #ffffff;
 
   --secondary: #1c2029;
   --secondary-foreground: #f7f8f8;
@@ -91,9 +106,9 @@
 
   --border: #262b36;
   --input: #262b36;
-  --ring: #818cf8;
+  --ring: #ff385c;
 
-  --chart-1: #818cf8;
+  --chart-1: #ff385c;
   --chart-2: #4ade80;
   --chart-3: #fbbf24;
   --chart-4: #60a5fa;
@@ -101,14 +116,62 @@
 
   --sidebar: #14171f;
   --sidebar-foreground: #f7f8f8;
-  --sidebar-primary: #818cf8;
-  --sidebar-primary-foreground: #0b0d12;
+  --sidebar-primary: #ff385c;
+  --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #1c2029;
   --sidebar-accent-foreground: #f7f8f8;
   --sidebar-border: #262b36;
-  --sidebar-ring: #818cf8;
+  --sidebar-ring: #ff385c;
 }
 
 /* Expose the tokens above as Tailwind utilities (`bg-background`, `text-muted-foreground`,
    `rounded-lg`, …). Without this block the classes in the shipped components do not exist. */
+
+html { color-scheme: light; }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-sans); font-size: 16px; line-height: 1.5; }
+a, button, input, textarea { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--ring); outline-offset: 4px; border-radius: var(--radius); }
+.site-container { width: var(--container); margin-inline: auto; }
+.public-page { min-height: 100svh; }
+.public-header { min-height: 80px; display: flex; align-items: center; gap: var(--space-xxl); border-bottom: 1px solid var(--border); }
+.wordmark { font-size: 20px; font-weight: 600; line-height: 1.2; letter-spacing: -0.18px; padding-block: var(--space-base); }
+.wordmark span { color: var(--primary); }
+.public-header nav, .public-footer nav { display: flex; gap: var(--space-xl); }
+.public-header nav a, .account-link { display: inline-flex; align-items: center; min-height: 44px; font-size: 16px; font-weight: 600; line-height: 1.25; }
+.public-header nav a { color: var(--muted-foreground); }
+.public-header nav a.active { color: var(--foreground); text-decoration: underline; text-underline-offset: 8px; }
+.account-link { margin-left: auto; }
+.home-arrival { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: var(--space-section); padding-top: var(--space-section); }
+.home-arrival > *, .home-help > * { min-width: 0; }
+.introduction h1 { font-size: var(--display-xl); font-weight: 700; line-height: 1.43; letter-spacing: 0; margin: 0 0 var(--space-base); }
+.introduction p { color: var(--body); max-width: 440px; margin: 0; }
+.account-access h2 { font-size: 16px; font-weight: 600; line-height: 1.25; margin: 0 0 var(--space-lg); }
+.btn-google { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-md); min-height: 48px; padding: 14px 24px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 16px; font-weight: 500; line-height: 1.25; background: var(--card); color: var(--card-foreground); }
+.btn-google-mark { width: 20px; height: 20px; flex-shrink: 0; padding: 2px; background: var(--card); border-radius: 50%; }
+.btn-google.google-primary, .primary-action { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); width: 100%; min-height: 48px; }
+.btn-google.google-primary:hover, .primary-action:hover { background: var(--primary-active); border-color: var(--primary-active); }
+.text-link { display: inline-flex; align-items: center; gap: var(--space-sm); min-height: 44px; text-decoration: underline; text-underline-offset: 4px; font-size: 14px; line-height: 1.43; }
+.account-access > .text-link { margin-top: var(--space-sm); }
+.supporting { font-size: 14px; line-height: 1.43; color: var(--muted-foreground); margin: var(--space-base) 0 0; overflow-wrap: anywhere; }
+.supporting a { color: var(--foreground); text-decoration: underline; text-underline-offset: 3px; }
+.nameplate { padding-block: var(--space-section); }
+.nameplate p { margin: 0; font-size: var(--rating-display); font-weight: 700; line-height: 1.1; letter-spacing: -1px; }
+.home-help { display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); padding-block: var(--space-xl); border-top: 1px solid var(--border); }
+.home-help p { margin: 0; }
+.public-footer { display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; gap: var(--space-lg); padding-block: var(--space-xxl); font-size: 14px; line-height: 1.43; }
+.public-footer nav a { display: inline-flex; align-items: center; min-height: 44px; }
+.footer-year { color: var(--muted-foreground); margin-left: var(--space-sm); }
+.skip-link { position: fixed; top: 8px; left: 24px; transform: translateY(-150%); padding: 12px; background: var(--background); z-index: 100; }
+.skip-link:focus { transform: none; }
+@media (max-width: 640px) {
+  .public-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 var(--space-lg); padding-block: var(--space-sm); }
+  .public-header nav { grid-row: 2; grid-column: 1 / -1; gap: var(--space-lg); }
+  .account-link { grid-row: 1; grid-column: 2; }
+  .home-arrival { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); padding-top: var(--space-xl); }
+  .account-access h2 { margin-bottom: var(--space-base); }
+  .nameplate { padding-block: var(--space-xxl); }
+  .home-help { display: block; padding-block: var(--space-lg); }
+  .home-help .text-link { margin-top: var(--space-sm); }
+  .public-footer { padding-block: var(--space-lg); }
+}
 

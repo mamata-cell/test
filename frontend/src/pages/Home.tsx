@@ -1,46 +1,29 @@
 import { Link } from "react-router-dom";
-
+import { ArrowUpRight } from "lucide-react";
 import { useAuth } from "../auth/AuthContext";
-import { Button } from "../ui";
+import { Button, GoogleButton } from "@/ui";
+import { PublicFooter, PublicHeader } from "../components/PublicChrome";
 
-// Auth-DORMANT, not auth-blind. Two constraints hold at once here:
-//
-//  1. An app that never asked for accounts must not ship a sign-in entry point.
-//     Nothing below renders a "Sign in" link — when there is no user (which is
-//     always, until auth is activated) this page is exactly the starter page it
-//     was before.
-//
-//  2. A SIGNED-IN visitor must be able to tell, and get back into the app. The
-//     post-login redirect lands on `/` (server.go), and this page renders OUTSIDE
-//     <Layout>, so it is the only thing that can show that state — without the
-//     `useAuth()` read below, signing in and not signing in look identical and
-//     the user is left on a marketing page with no way forward. Measured on app
-//     722: sign-in succeeded, a real session was issued, and the user reported it
-//     as broken because nothing on screen changed.
-//
-// Rebuilding this page? Keep the signed-in branch. Point it at whatever this app's
-// primary signed-in surface actually is.
 export function Home() {
   const { user } = useAuth();
-
   return (
-    <div className="bg-background text-foreground min-h-screen">
-      <main className="mx-auto grid max-w-6xl gap-4 px-6 py-16">
-        <h1 className="text-3xl font-semibold tracking-tight">Building your app…</h1>
-        <p className="text-muted-foreground">
-          This page is a placeholder. Your app is still being built — it will replace this
-          the moment the first screen is ready.
-        </p>
-
-        {user && (
-          <div className="flex flex-wrap items-center gap-3 pt-2">
-            <Button asChild>
-              <Link to="/dashboard">Open the app</Link>
-            </Button>
-            <span className="text-muted-foreground text-sm">Signed in as {user.email}</span>
+    <div className="public-page">
+      <PublicHeader />
+      <main id="main-content" className="site-container">
+        <section className="home-arrival" aria-labelledby="arrival-title">
+          <div className="introduction">
+            <h1 id="arrival-title">A clear place to begin.</h1>
+            <p>Create your Clearline account, return when you need it, and get in touch when you have a question.</p>
           </div>
-        )}
+          <div className="account-access">
+            <h2>Your account, within reach.</h2>
+            {user ? <><Button asChild className="primary-action"><Link to="/account">Open your account <ArrowUpRight size={18} /></Link></Button><p className="supporting">Signed in as {user.email}</p></> : <><GoogleButton label="Continue with Google" className="google-primary" /><Link className="text-link" to="/sign-in">Use email instead <ArrowUpRight size={16} /></Link><p className="supporting">Already signed in? <Link to="/account">Open your account.</Link></p></>}
+          </div>
+        </section>
+        <section className="nameplate" aria-label="Clearline"><p>Clearline</p></section>
+        <section className="home-help"><p>Need a hand getting started?</p><Link className="text-link" to="/contact">Contact us <ArrowUpRight size={18} /></Link></section>
       </main>
+      <PublicFooter />
     </div>
   );
 }
