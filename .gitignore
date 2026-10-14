@@ -38,3 +38,10 @@ venv/
 # Logen drops the preview key-minter codemod here at sweep time. Ignore THAT FILE only —
 # `.logen/setup.sh` is a committed provisioning hook and must stay tracked.
 .logen/mint_keys.cjs
+
+# Logen: toolchain state and temp scratch — regenerated, never source. Tracking these made
+# every re-publish merge one container's build scratch against another's,
+# which is unresolvable for a binary like .tmp/mix_lock_*/lock_0.
+.hex/
+.mix/
+.tmp/
