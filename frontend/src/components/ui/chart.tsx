@@ -51,7 +51,7 @@ function ChartContainer({
 
   return (
     <ChartContext.Provider value={{ config }}>
-      <div
+      <div data-lg-key="b56f6d0b47"
         data-slot="chart"
         data-chart={chartId}
         className={cn(
@@ -73,7 +73,7 @@ function ChartStyle({ id, config }: { id: string; config: ChartConfig }) {
   if (!colorConfig.length) return null;
 
   return (
-    <style
+    <style data-lg-key="ec4173e54b"
       dangerouslySetInnerHTML={{
         __html: `[data-chart=${id}] {\n${colorConfig
           .map(([key, item]) => `  --color-${key}: ${item.color};`)
@@ -105,28 +105,28 @@ function ChartTooltipContent({
   if (!active || !payload?.length) return null;
 
   return (
-    <div
+    <div data-lg-key="b038c9a56d"
       className={cn(
         "border-border/50 bg-background grid min-w-[8rem] items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-xl",
         className,
       )}
     >
-      {!hideLabel && label ? <div className="font-medium">{label}</div> : null}
-      <div className="grid gap-1.5">
+      {!hideLabel && label ? <div data-lg-key="48bef87d6e" className="font-medium">{label}</div> : null}
+      <div data-lg-key="c3db96db51" className="grid gap-1.5">
         {payload.map((item, index) => {
           const key = String(item.dataKey ?? item.name ?? index);
           const itemConfig = config[key];
           return (
-            <div key={key} className="flex w-full items-center gap-2">
+            <div data-lg-key="4418c83a0f" key={key} className="flex w-full items-center gap-2">
               {!hideIndicator && (
-                <div
+                <div data-lg-key="b45bbf86a3"
                   className="h-2.5 w-2.5 shrink-0 rounded-[2px]"
                   style={{ backgroundColor: `var(--color-${key})` }}
                 />
               )}
-              <div className="flex flex-1 justify-between leading-none">
-                <span className="text-muted-foreground">{itemConfig?.label ?? key}</span>
-                <span className="text-foreground font-mono font-medium tabular-nums">
+              <div data-lg-key="03ca92bf61" className="flex flex-1 justify-between leading-none">
+                <span data-lg-key="f26df1c1f4" className="text-muted-foreground">{itemConfig?.label ?? key}</span>
+                <span data-lg-key="1736224747" className="text-foreground font-mono font-medium tabular-nums">
                   {String(item.value ?? "")}
                 </span>
               </div>
@@ -151,12 +151,12 @@ function ChartLegendContent({
   if (!payload?.length) return null;
 
   return (
-    <div className={cn("flex items-center justify-center gap-4 pt-3", className)}>
+    <div data-lg-key="8ae0a3c6a9" className={cn("flex items-center justify-center gap-4 pt-3", className)}>
       {payload.map((item, index) => {
         const key = String(item.dataKey ?? item.value ?? index);
         return (
-          <div key={key} className="flex items-center gap-1.5">
-            <div
+          <div data-lg-key="b772c9f3f5" key={key} className="flex items-center gap-1.5">
+            <div data-lg-key="eeddcb4a1f"
               className="h-2 w-2 shrink-0 rounded-[2px]"
               style={{ backgroundColor: `var(--color-${key})` }}
             />

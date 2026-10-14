@@ -108,7 +108,7 @@ function MessageScrollerButton({
       {children ?? (
         <>
           <ArrowDownIcon />
-          <span className="sr-only">
+          <span data-lg-key="4b115b36bd" className="sr-only">
             {direction === "end" ? "Scroll to end" : "Scroll to start"}
           </span>
         </>

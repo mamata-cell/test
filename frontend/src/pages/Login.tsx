@@ -1,8 +1,9 @@
 import { useState, type FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { ApiError } from "../lib/api";
 import { useAuth } from "../auth/AuthContext";
-import { Button, Card, CardHeader, CardContent, CardFooter, Input, Label } from "../ui";
+import { Button, GoogleButton, Input, Label } from "@/ui";
+import { toast } from "sonner";
 
 // Combined sign-in / create-account form. Email + password.
 //
@@ -16,7 +17,8 @@ import { Button, Card, CardHeader, CardContent, CardFooter, Input, Label } from 
 // GoogleButton is full-width and carries its own .btn-google styling (kept as plain
 // CSS in index.css so a Tailwind restyle cannot drift it off Google's brand rules).
 export function Login() {
-  const { login, register } = useAuth();
+  const { user, loading, login, register } = useAuth();
+  const [params] = useSearchParams();
   const navigate = useNavigate();
   const [mode, setMode] = useState<"login" | "register">("login");
   const [email, setEmail] = useState("");
@@ -32,7 +34,8 @@ export function Login() {
     try {
       if (mode === "login") await login(email, password);
       else await register(email, password, name);
-      navigate("/dashboard");
+      toast.success(mode === "login" ? "You’re signed in." : "Your account is ready.");
+      navigate("/account", { replace: true });
     } catch (err) {
       setError(messageFor(err, mode));
     } finally {
@@ -40,74 +43,82 @@ export function Login() {
     }
   }
 
+  if (loading) return <main className="site-container auth-page"><p role="status">Checking your session…</p></main>;
+  if (user) return <Navigate to="/account" replace />;
+  const oauthError = params.get("auth_error");
   return (
-    <div style={{ maxWidth: 400, margin: "0 auto" }}>
-      <Card>
-        <CardHeader>
-        <h1 style={{ marginBottom: 4 }}>{mode === "login" ? "Sign in" : "Create account"}</h1>
-        <p className="text-muted-foreground text-sm">
-          {mode === "login" ? "Welcome back." : "Get started with a new account."}
-        </p>
-        </CardHeader>
-        <CardContent>
-        <form id="auth-form" onSubmit={onSubmit} style={{ display: "grid", gap: 14 }}>
+    <main className="site-container auth-page" id="main-content">
+      <Link className="text-link" to="/">← Back to Home</Link>
+      <div className="auth-column">
+        <h1>{mode === "login" ? "Sign in to Clearline." : "Create your account."}</h1>
+        <p className="supporting">{mode === "login" ? "Your account, within reach." : "A clear place to begin."}</p>
+        {oauthError && <p className="form-error" role="alert">{oauthError === "email_conflict" ? "Please sign in with email and password for your existing account." : "Google sign-in didn’t complete. Please try again or use email instead."}</p>}
+        <GoogleButton label="Continue with Google" className="auth-google-full" />
+        <div className="auth-divider"><span>or use email</span></div>
+        <form id="auth-form" onSubmit={onSubmit} className="clearline-form" aria-busy={busy}>
           {mode === "register" && (
-            <div className="grid gap-2">
+            <div data-lg-key="08d98c3646" className="grid gap-2">
               <Label htmlFor="name">Name</Label>
-              <Input id="name" value={name} onChange={(e) => setName(e.target.value)} />
+              <Input id="name" autoComplete="name" required maxLength={100} value={name} onChange={(e) => setName(e.target.value)} disabled={busy} />
             </div>
           )}
-          <div className="grid gap-2">
+          <div data-lg-key="1a5168b079" className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
               type="email"
+              autoComplete="email"
+              maxLength={254}
+              disabled={busy}
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="grid gap-2">
+          <div data-lg-key="d0f8cecd42" className="grid gap-2">
             <Label htmlFor="password">Password</Label>
             <Input
               id="password"
               type="password"
               required
               minLength={8}
+              maxLength={72}
+              autoComplete={mode === "register" ? "new-password" : "current-password"}
+              disabled={busy}
               placeholder="At least 8 characters"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              aria-invalid={!!error}
+              aria-describedby="password-hint auth-error"
             />
-            {error && <p className="text-destructive text-sm">{error}</p>}
+            <p id="password-hint" className="supporting">At least 8 characters.</p>
           </div>
-          <Button type="submit" disabled={busy}>
-            {busy ? "…" : mode === "login" ? "Sign in" : "Create account"}
+          {error && <p id="auth-error" className="form-error" role="alert">{error}</p>}
+          <Button className="primary-action" type="submit" disabled={busy}>
+            {busy ? "Please wait…" : mode === "login" ? "Sign in" : "Create account"}
           </Button>
         </form>
-        </CardContent>
-        <CardFooter className="justify-center">
           <Button
-            variant="ghost"
-            size="sm"
+            variant="link"
+            className="auth-mode"
             type="button"
+            disabled={busy}
             onClick={() => {
               setMode(mode === "login" ? "register" : "login");
               setError(null);
             }}
           >
-            {mode === "login" ? "Need an account? Create one" : "Have an account? Sign in"}
+            {mode === "login" ? "Create an account" : "Have an account? Sign in"}
           </Button>
-        </CardFooter>
-      </Card>
-    </div>
+      </div>
+    </main>
   );
 }
 
 function messageFor(err: unknown, mode: "login" | "register"): string {
   if (err instanceof ApiError) {
     if (err.status === 401) return "Wrong email or password.";
-    if (err.status === 409) return "That email is already registered.";
+    if (err.status === 409) return "Could not create this account. Try signing in instead.";
+    if (err.status === 429) return "Too many attempts. Please wait a few minutes and try again.";
     if (err.status === 400) return "Enter a valid email and a password of at least 8 characters.";
   }
   return mode === "login" ? "Could not sign in. Try again." : "Could not create account. Try again.";

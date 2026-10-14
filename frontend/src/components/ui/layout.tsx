@@ -21,15 +21,15 @@ function PageHeader({
   className?: string;
 }) {
   return (
-    <div
+    <div data-lg-key="154cc9862c"
       data-slot="page-header"
       className={cn("flex flex-wrap items-start justify-between gap-4 pb-6", className)}
     >
-      <div className="grid gap-1">
-        <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
-        {subtitle && <p className="text-muted-foreground text-sm">{subtitle}</p>}
+      <div data-lg-key="d4c66cb2a2" className="grid gap-1">
+        <h1 data-lg-key="c68ad7a351" className="text-2xl font-semibold tracking-tight">{title}</h1>
+        {subtitle && <p data-lg-key="75058c5537" className="text-muted-foreground text-sm">{subtitle}</p>}
       </div>
-      {actions && <div className="flex items-center gap-2">{actions}</div>}
+      {actions && <div data-lg-key="554e3a7835" className="flex items-center gap-2">{actions}</div>}
     </div>
   );
 }
@@ -48,19 +48,19 @@ function EmptyState({
   className?: string;
 }) {
   return (
-    <div
+    <div data-lg-key="e570bad9ee"
       data-slot="empty-state"
       className={cn(
         "flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed px-6 py-14 text-center",
         className,
       )}
     >
-      {icon && <div className="text-muted-foreground [&_svg]:size-8">{icon}</div>}
-      <h3 className="font-semibold">{title}</h3>
+      {icon && <div data-lg-key="c55d3c904e" className="text-muted-foreground [&_svg]:size-8">{icon}</div>}
+      <h3 data-lg-key="7edeb26fd9" className="font-semibold">{title}</h3>
       {description && (
-        <p className="text-muted-foreground max-w-sm text-sm">{description}</p>
+        <p data-lg-key="0b09f33300" className="text-muted-foreground max-w-sm text-sm">{description}</p>
       )}
-      {action && <div className="pt-1">{action}</div>}
+      {action && <div data-lg-key="1bfc6690e8" className="pt-1">{action}</div>}
     </div>
   );
 }

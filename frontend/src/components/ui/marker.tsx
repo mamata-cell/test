@@ -40,7 +40,7 @@ function Marker({
 
 function MarkerIcon({ className, ...props }: React.ComponentProps<"span">) {
   return (
-    <span
+    <span data-lg-key="4fc9f60174"
       data-slot="marker-icon"
       aria-hidden="true"
       className={cn(
@@ -54,7 +54,7 @@ function MarkerIcon({ className, ...props }: React.ComponentProps<"span">) {
 
 function MarkerContent({ className, ...props }: React.ComponentProps<"span">) {
   return (
-    <span
+    <span data-lg-key="7a60b5ec73"
       data-slot="marker-content"
       className={cn(
         "min-w-0 wrap-break-word group-data-[variant=separator]/marker:flex-none group-data-[variant=separator]/marker:text-center *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",

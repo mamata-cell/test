@@ -34,7 +34,7 @@ function Attachment({
     state?: "idle" | "uploading" | "processing" | "error" | "done"
   }) {
   return (
-    <div
+    <div data-lg-key="11e060a9fa"
       data-slot="attachment"
       data-state={state}
       data-size={size}
@@ -67,7 +67,7 @@ function AttachmentMedia({
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof attachmentMediaVariants>) {
   return (
-    <div
+    <div data-lg-key="5ca207d328"
       data-slot="attachment-media"
       data-variant={variant}
       className={cn(attachmentMediaVariants({ variant }), className)}
@@ -81,7 +81,7 @@ function AttachmentContent({
   ...props
 }: React.ComponentProps<"div">) {
   return (
-    <div
+    <div data-lg-key="a5870bb033"
       data-slot="attachment-content"
       className={cn(
         "max-w-full min-w-0 flex-1 leading-tight group-data-[orientation=vertical]/attachment:px-1",
@@ -97,7 +97,7 @@ function AttachmentTitle({
   ...props
 }: React.ComponentProps<"span">) {
   return (
-    <span
+    <span data-lg-key="33ff27f5b4"
       data-slot="attachment-title"
       className={cn(
         "block max-w-full min-w-0 truncate font-medium group-data-[state=processing]/attachment:shimmer group-data-[state=uploading]/attachment:shimmer",
@@ -113,7 +113,7 @@ function AttachmentDescription({
   ...props
 }: React.ComponentProps<"span">) {
   return (
-    <span
+    <span data-lg-key="1061001c50"
       data-slot="attachment-description"
       className={cn(
         "mt-0.5 block min-w-0 truncate text-xs text-muted-foreground group-data-[state=error]/attachment:text-destructive/80",
@@ -130,7 +130,7 @@ function AttachmentActions({
   ...props
 }: React.ComponentProps<"div">) {
   return (
-    <div
+    <div data-lg-key="418bfe6dd0"
       data-slot="attachment-actions"
       className={cn(
         "relative z-20 flex shrink-0 items-center group-data-[orientation=vertical]/attachment:absolute group-data-[orientation=vertical]/attachment:top-3 group-data-[orientation=vertical]/attachment:right-3 group-data-[orientation=vertical]/attachment:gap-1",
@@ -180,7 +180,7 @@ function AttachmentTrigger({
 
 function AttachmentGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div
+    <div data-lg-key="5f590d13f7"
       data-slot="attachment-group"
       className={cn(
         "flex min-w-0 scroll-fade-x snap-x snap-mandatory scroll-px-1 scrollbar-none gap-3 overflow-x-auto overscroll-x-contain py-1 *:data-[slot=attachment]:flex-none *:data-[slot=attachment]:snap-start",

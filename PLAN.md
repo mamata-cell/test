@@ -24,35 +24,35 @@ Use Postgres with database/sql and pgx on DATABASE_URL. users: UUID primary key,
 
 ## Acceptance items
 
-- [ ] `trd-1` — core — **pending**
+- [~] `trd-1` — core — **implemented**
   - acceptance: With a fresh Postgres database, migrations apply successfully and each declared page path serves the React application rather than a missing-route response.
   - verify: check
   - steps: Create migrations/0001_accounts_and_contact.sql for the declared data model. Wire the Postgres connection in main.go and place account, session and contact persistence in Go packages under the repo root. Register relative /api routes in main.go and serve the Vite frontend with page-route fallback.
-- [ ] `trd-2` — User authentication — **pending**
+- [~] `trd-2` — User authentication — **implemented**
   - acceptance: A new email account can register, sign out and sign back in; /api/auth/session returns its correct email and user role while an unauthenticated account-data request returns 401.
   - verify: check
   - steps: Activate any existing Go authentication scaffold before adding new handlers. Implement POST /api/auth/register, POST /api/auth/login, GET /api/auth/session and POST /api/auth/logout in Go handlers with password hashing, validation, rate limiting and secure session cookies. Protect account data server-side and apply origin or CSRF checks to mutations.
-- [ ] `trd-3` — User authentication — **pending**
+- [~] `trd-3` — User authentication — **implemented**
   - acceptance: With Google credentials configured, completing Google sign-in creates or retrieves a persisted user and opens /account with the correct session; cancellation or invalid state leaves the visitor signed out with a recoverable message.
   - verify: self_check
   - steps: Implement GET /api/auth/google and GET /api/auth/google/callback in Go using configured Google client credentials and callback URL. Validate browser-bound state and provider identity, persist the Google identity and issue the same session type as email authentication. Do not silently merge identities solely by matching email; handle an existing email-account conflict with a clear sign-in instruction. Return a safe configuration error when Google credentials are absent.
-- [ ] `trd-4` — User authentication — **pending**
+- [~] `trd-4` — User authentication — **implemented**
   - acceptance: Running the seed twice in preview creates exactly one declared demo identity whose actual login reports member@demo.test and role user; execution outside preview or verification is refused.
   - verify: check
   - steps: Implement .logen/seed-demo.sh to read version-1 JSON from LOGEN_DEMO_ACCOUNTS_FILE and invoke the native Go account creation service through a Go seed command. Permit only preview and verification environments, seed the declared user idempotently and keep passwords out of source and production seeds. Verify the seeded identity through the real login and session endpoints.
-- [ ] `trd-5` — User authentication — **pending**
+- [~] `trd-5` — User authentication — **implemented**
   - acceptance: In the deployed React app, email creation, email sign-in, Google entry, account identity display and Sign out are usable, and a signed-out visitor cannot view /account identity data.
   - verify: self_check
   - steps: Create frontend/src/pages/SignIn.tsx and frontend/src/pages/Account.tsx, wire /sign-in and /account in frontend/src/App.tsx, and use shared primitives from @/ui. Connect Google navigation and email forms to /api/auth endpoints. Resolve session state before rendering protected account data, redirect signed-out visitors to /sign-in and clear client account state on logout.
-- [ ] `trd-6` — Landing page — **pending**
+- [~] `trd-6` — Landing page — **implemented**
   - acceptance: The deployed / page renders complete content for a visitor with zero records, and its Google, email, Contact and authenticated Account actions reach their intended destinations.
   - verify: self_check
   - steps: Create frontend/src/pages/Home.tsx, wire / in frontend/src/App.tsx and connect its actions to Google authentication, /sign-in and /contact. Make its authenticated account link depend on GET /api/auth/session. Apply the binding design plan and preset authority through frontend/src/index.css and shared @/ui primitives.
-- [ ] `trd-7` — core — **pending**
+- [~] `trd-7` — core — **implemented**
   - acceptance: Both signed-out and signed-in visitors can save a valid contact message, while invalid input creates no record and exposes field-specific guidance.
   - verify: check
   - steps: Create frontend/src/pages/Contact.tsx and wire /contact in frontend/src/App.tsx. Implement POST /api/contact in Go handlers with server-side length and email validation, rate limiting and Postgres persistence. Associate the current user when present without requiring authentication; return success only after insertion succeeds.
-- [ ] `trd-8` — core — **pending**
+- [~] `trd-8` — core — **implemented**
   - acceptance: Every declared page is usable at 360px width and by keyboard without horizontal overflow, inaccessible controls or an unresolved loading state.
   - verify: self_check
   - steps: Exercise all declared React routes at desktop and phone widths, including fresh-account, pending, error and success states. Check frontend/src/index.css and @/ui primitives for visible focus, reduced-motion behavior and readable controls; verify keyboard form submission and meaningful labels. Use React-compatible icons only if necessary, never framework-specific template constructs.

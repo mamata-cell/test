@@ -53,9 +53,9 @@ export function AppShell({
 }) {
   if (pattern === "topbar-main" || !sidebar) {
     return (
-      <div className={cn("bg-background text-foreground flex min-h-svh flex-col", className)}>
+      <div data-lg-key="f94f97b3b3" className={cn("bg-background text-foreground flex min-h-svh flex-col", className)}>
         {topbar && <ShellTopbar>{topbar}</ShellTopbar>}
-        <main className="min-w-0 flex-1">{children}</main>
+        <main data-lg-key="cb37d82d18" className="min-w-0 flex-1">{children}</main>
       </div>
     );
   }
@@ -69,11 +69,11 @@ export function AppShell({
     >
       <Sidebar variant={variant} collapsible={withRail ? "offcanvas" : collapse}>
         {withRail ? (
-          <div className="flex h-full min-h-0">
-            <div className="border-sidebar-border flex w-14 shrink-0 flex-col items-center gap-3 overflow-y-auto border-r py-3">
+          <div data-lg-key="87936c6202" className="flex h-full min-h-0">
+            <div data-lg-key="ddd8183403" className="border-sidebar-border flex w-14 shrink-0 flex-col items-center gap-3 overflow-y-auto border-r py-3">
               {rail}
             </div>
-            <div className="flex min-w-0 flex-1 flex-col">{sidebar}</div>
+            <div data-lg-key="44ce5af3f9" className="flex min-w-0 flex-1 flex-col">{sidebar}</div>
           </div>
         ) : (
           sidebar
@@ -86,7 +86,7 @@ export function AppShell({
             {topbar}
           </ShellTopbar>
         )}
-        <main className="min-w-0 flex-1">{children}</main>
+        <main data-lg-key="6cc3dd00d7" className="min-w-0 flex-1">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );
@@ -94,7 +94,7 @@ export function AppShell({
 
 function ShellTopbar({ children }: { children: ReactNode }) {
   return (
-    <header className="bg-background/95 sticky top-0 z-30 flex min-h-14 shrink-0 items-center gap-3 border-b px-4 backdrop-blur lg:px-6">
+    <header data-lg-key="c3d15d726a" className="bg-background/95 sticky top-0 z-30 flex min-h-14 shrink-0 items-center gap-3 border-b px-4 backdrop-blur lg:px-6">
       {children}
     </header>
   );
@@ -109,7 +109,7 @@ export function AppContent({
   className?: string;
 }) {
   return (
-    <div className={cn("mx-auto w-full max-w-[1480px] px-4 py-6 lg:px-8", className)}>
+    <div data-lg-key="e41abc3caa" className={cn("mx-auto w-full max-w-[1480px] px-4 py-6 lg:px-8", className)}>
       {children}
     </div>
   );
@@ -132,16 +132,16 @@ export function BrandLockup({
   className?: string;
 }) {
   return (
-    <div className={cn("flex min-w-0 items-center gap-3 px-3 py-2", className)}>
+    <div data-lg-key="e5ef459351" className={cn("flex min-w-0 items-center gap-3 px-3 py-2", className)}>
       {mark && (
-        <span className="bg-primary text-primary-foreground grid size-9 shrink-0 place-items-center rounded-lg">
+        <span data-lg-key="3681ce746f" className="bg-primary text-primary-foreground grid size-9 shrink-0 place-items-center rounded-lg">
           {mark}
         </span>
       )}
-      <span className="grid min-w-0 leading-tight">
-        <span className="truncate text-lg font-semibold tracking-tight">{name}</span>
+      <span data-lg-key="1d8e642b97" className="grid min-w-0 leading-tight">
+        <span data-lg-key="bc4915e56d" className="truncate text-lg font-semibold tracking-tight">{name}</span>
         {subtitle && (
-          <span className="text-muted-foreground truncate text-[10px] font-medium tracking-[0.12em] uppercase">
+          <span data-lg-key="5a9368c29f" className="text-muted-foreground truncate text-[10px] font-medium tracking-[0.12em] uppercase">
             {subtitle}
           </span>
         )}
@@ -170,32 +170,32 @@ export function AuthShell({
   className?: string;
 }) {
   return (
-    <div
+    <div data-lg-key="1048fad07a"
       className={cn(
         "bg-background text-foreground relative grid min-h-svh place-items-center overflow-hidden px-4 py-10",
         className,
       )}
     >
       {ornament === "gradient" && (
-        <div
+        <div data-lg-key="b4f6eb678c"
           aria-hidden
           className="from-primary/10 pointer-events-none absolute inset-0 bg-gradient-to-b to-transparent"
         />
       )}
       {ornament === "mark" && brand && (
-        <div
+        <div data-lg-key="31d2a8d5fc"
           aria-hidden
           className="text-primary/5 pointer-events-none absolute -right-16 -bottom-16 [&_svg]:size-64"
         >
           {brand}
         </div>
       )}
-      <div className="relative z-10 w-full max-w-md">
-        <div className="bg-card text-card-foreground rounded-xl border p-6 shadow-sm sm:p-8">
+      <div data-lg-key="c7343e0dd2" className="relative z-10 w-full max-w-md">
+        <div data-lg-key="3d8a47347d" className="bg-card text-card-foreground rounded-xl border p-6 shadow-sm sm:p-8">
           {children}
         </div>
         {footer && (
-          <div className="text-muted-foreground mt-4 text-center text-xs">{footer}</div>
+          <div data-lg-key="f4ad23df3f" className="text-muted-foreground mt-4 text-center text-xs">{footer}</div>
         )}
       </div>
     </div>

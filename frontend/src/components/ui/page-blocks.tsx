@@ -51,13 +51,13 @@ export function ListPage({
   className?: string;
 }) {
   return (
-    <div className={cn("flex min-w-0 flex-col gap-4", className)}>
+    <div data-lg-key="dc497a2897" className={cn("flex min-w-0 flex-col gap-4", className)}>
       <PageHeader title={title} subtitle={description} actions={actions} />
       {toolbar && (
-        <div className="flex min-w-0 flex-wrap items-center gap-2">{toolbar}</div>
+        <div data-lg-key="09d7b80ea7" className="flex min-w-0 flex-wrap items-center gap-2">{toolbar}</div>
       )}
       {loading ? (
-        <div className="flex flex-col gap-2">
+        <div data-lg-key="838a956137" className="flex flex-col gap-2">
           <Skeleton className="h-9 w-full" />
           <Skeleton className="h-9 w-full" />
           <Skeleton className="h-9 w-5/6" />
@@ -65,10 +65,10 @@ export function ListPage({
       ) : empty && emptyProps ? (
         <EmptyState {...emptyProps} />
       ) : (
-        <div className="min-w-0">{children}</div>
+        <div data-lg-key="8ef848677d" className="min-w-0">{children}</div>
       )}
       {!loading && !empty && pagination && (
-        <div className="flex items-center justify-end gap-2">{pagination}</div>
+        <div data-lg-key="a1f355cc7a" className="flex items-center justify-end gap-2">{pagination}</div>
       )}
     </div>
   );
@@ -98,7 +98,7 @@ export function DetailPage({
   className?: string;
 }) {
   return (
-    <div className={cn("flex min-w-0 flex-col gap-4", className)}>
+    <div data-lg-key="a571910a8a" className={cn("flex min-w-0 flex-col gap-4", className)}>
       {backTo && (
         <Link
           to={backTo}
@@ -110,12 +110,12 @@ export function DetailPage({
       )}
       <PageHeader title={title} subtitle={description} actions={actions} />
       {aside ? (
-        <div className="grid min-w-0 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(280px,360px)] lg:items-start">
-          <div className="min-w-0">{children}</div>
-          <div className="min-w-0">{aside}</div>
+        <div data-lg-key="a86b7e3d5d" className="grid min-w-0 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(280px,360px)] lg:items-start">
+          <div data-lg-key="a67c62c4e3" className="min-w-0">{children}</div>
+          <div data-lg-key="a09dd31192" className="min-w-0">{aside}</div>
         </div>
       ) : (
-        <div className="min-w-0">{children}</div>
+        <div data-lg-key="0e7c0f709a" className="min-w-0">{children}</div>
       )}
     </div>
   );
@@ -134,9 +134,9 @@ export function SettingsPage({
   className?: string;
 }) {
   return (
-    <div className={cn("flex min-w-0 max-w-3xl flex-col gap-6", className)}>
+    <div data-lg-key="d5ac22e023" className={cn("flex min-w-0 max-w-3xl flex-col gap-6", className)}>
       <PageHeader title={title} subtitle={description} />
-      <div className="flex flex-col divide-y">{children}</div>
+      <div data-lg-key="ae191c089a" className="flex flex-col divide-y">{children}</div>
     </div>
   );
 }
@@ -154,14 +154,14 @@ export function SettingsSection({
   className?: string;
 }) {
   return (
-    <div className={cn("grid min-w-0 gap-3 py-6 first:pt-0 last:pb-0 sm:grid-cols-[220px_minmax(0,1fr)] sm:gap-6", className)}>
-      <div className="min-w-0">
-        <h3 className="text-sm font-medium">{title}</h3>
+    <div data-lg-key="c941c0b3b1" className={cn("grid min-w-0 gap-3 py-6 first:pt-0 last:pb-0 sm:grid-cols-[220px_minmax(0,1fr)] sm:gap-6", className)}>
+      <div data-lg-key="d565da15f7" className="min-w-0">
+        <h3 data-lg-key="116e1114d6" className="text-sm font-medium">{title}</h3>
         {description && (
-          <p className="text-muted-foreground mt-1 text-sm">{description}</p>
+          <p data-lg-key="b3e6b010b2" className="text-muted-foreground mt-1 text-sm">{description}</p>
         )}
       </div>
-      <div className="min-w-0">{children}</div>
+      <div data-lg-key="eb9a07b8aa" className="min-w-0">{children}</div>
     </div>
   );
 }
@@ -183,15 +183,15 @@ export function StatsRow({
   className?: string;
 }) {
   return (
-    <div className={cn("grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-4", className)}>
+    <div data-lg-key="1593ea2c65" className={cn("grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-4", className)}>
       {items.map((item) => (
-        <div key={item.label} className="bg-card text-card-foreground min-w-0 rounded-lg border p-4">
-          <div className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
+        <div data-lg-key="05290a464a" key={item.label} className="bg-card text-card-foreground min-w-0 rounded-lg border p-4">
+          <div data-lg-key="06f1092c62" className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
             {item.label}
           </div>
-          <div className="mt-1 truncate text-2xl font-semibold tabular-nums">{item.value}</div>
+          <div data-lg-key="b2db4e314e" className="mt-1 truncate text-2xl font-semibold tabular-nums">{item.value}</div>
           {item.delta && (
-            <div
+            <div data-lg-key="3320a0bc0d"
               className={cn(
                 "mt-1 text-xs tabular-nums",
                 item.tone === "up" && "text-emerald-600 dark:text-emerald-400",

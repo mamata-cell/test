@@ -3,15 +3,18 @@ package main
 import (
 	"context"
 	"crypto/rand"
+	"crypto/subtle"
 	"encoding/base64"
 	"errors"
 	"log"
 	"net/http"
+	"net/mail"
 	"net/url"
 	"strings"
 	"time"
 
 	"github.com/jackc/pgx/v5/pgconn"
+	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -48,10 +51,13 @@ func (s *Server) routes(mux *http.ServeMux) {
 	mux.HandleFunc("GET /api/health", s.handleHealth)
 
 	// Email + password auth. Endpoints live under /api so Vite proxies them to Go.
-	mux.HandleFunc("POST /api/auth/register", s.handleRegister)
-	mux.HandleFunc("POST /api/auth/login", s.handleLogin)
-	mux.HandleFunc("POST /api/auth/logout", s.handleLogout)
+	mux.Handle("POST /api/auth/register", mutationGuard("register", 15, http.HandlerFunc(s.handleRegister)))
+	mux.Handle("POST /api/auth/login", mutationGuard("login", 30, http.HandlerFunc(s.handleLogin)))
+	mux.Handle("POST /api/auth/logout", mutationGuard("logout", 60, http.HandlerFunc(s.handleLogout)))
 	mux.HandleFunc("GET /api/auth/me", s.handleMe)
+	mux.HandleFunc("GET /api/auth/session", s.handleMe)
+	s.protected(mux, "GET /api/account", s.handleAccount)
+	mux.Handle("POST /api/contact", mutationGuard("contact", 20, http.HandlerFunc(s.handleContact)))
 
 	// Google sign-in via Logen's proxy — no Google credentials needed (see logen.go).
 	// These are browser NAVIGATIONS, not fetches. Do NOT hand-write the control: the
@@ -62,6 +68,7 @@ func (s *Server) routes(mux *http.ServeMux) {
 	// Google. Both routes end in the same session cookie as handleLogin, so requireUser
 	// covers Google users with no extra work.
 	mux.HandleFunc("GET /api/auth/google/login", s.handleGoogleLogin)
+	mux.HandleFunc("GET /api/auth/google", s.handleGoogleLogin)
 	mux.HandleFunc("GET /api/auth/google/callback", s.handleGoogleCallback)
 
 	// Pre-embedded file uploads (uploads.go). Files are stored on local disk and
@@ -107,7 +114,7 @@ func (s *Server) handleRegister(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	email := normalizeEmail(in.Email)
-	if !validEmail(email) || len(in.Password) < 8 {
+	if !validEmail(email) || len(in.Password) < 8 || len(in.Password) > 72 || len(strings.TrimSpace(in.Name)) > 100 {
 		writeJSON(w, http.StatusBadRequest,
 			map[string]any{"error": "a valid email and a password of at least 8 characters are required"})
 		return
@@ -149,6 +156,10 @@ func (s *Server) handleLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	email := normalizeEmail(in.Email)
+	if !validEmail(email) || len(in.Password) > 72 || in.Password == "" {
+		writeJSON(w, http.StatusUnauthorized, map[string]any{"error": "invalid_credentials"})
+		return
+	}
 
 	var u User
 	var hash string
@@ -171,7 +182,10 @@ func (s *Server) handleLogin(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) handleLogout(w http.ResponseWriter, r *http.Request) {
 	if c, err := r.Cookie(sessionCookie); err == nil && c.Value != "" {
-		_, _ = s.pool.Exec(r.Context(), `DELETE FROM sessions WHERE token = $1`, c.Value)
+		if _, err := s.pool.Exec(r.Context(), `DELETE FROM sessions WHERE token = $1`, sessionDigest(c.Value)); err != nil {
+			serverError(w, r, "logout_failed", err)
+			return
+		}
 	}
 	clearSessionCookie(w)
 	w.WriteHeader(http.StatusNoContent)
@@ -196,10 +210,13 @@ func (s *Server) handleMe(w http.ResponseWriter, r *http.Request) {
 // the browser back to handleGoogleCallback.
 func (s *Server) handleGoogleLogin(w http.ResponseWriter, r *http.Request) {
 	if !s.logen.Configured() {
-		writeJSON(w, http.StatusServiceUnavailable, map[string]any{"error": "google_auth_unavailable"})
+		http.Redirect(w, r, "/sign-in?auth_error=unavailable", http.StatusFound)
 		return
 	}
-	callback := publicOrigin(r) + "/api/auth/google/callback"
+	state, err := newToken()
+	if err != nil { serverError(w, r, "state_failed", err); return }
+	http.SetCookie(w, &http.Cookie{Name:"google_state", Value:state, Path:"/api/auth/google", HttpOnly:true, Secure:true, SameSite:http.SameSiteLaxMode, MaxAge:600})
+	callback := publicOrigin(r) + "/api/auth/google/callback?state=" + url.QueryEscape(state)
 	http.Redirect(w, r, s.logen.LoginURL(callback), http.StatusFound)
 }
 
@@ -211,55 +228,66 @@ func (s *Server) handleGoogleLogin(w http.ResponseWriter, r *http.Request) {
 // so the user has to land back in the app. Errors go to /?auth_error=… for the SPA
 // to render — a JSON body would be shown as raw text in the address bar.
 func (s *Server) handleGoogleCallback(w http.ResponseWriter, r *http.Request) {
+	stateCookie, stateErr := r.Cookie("google_state")
+	http.SetCookie(w, &http.Cookie{Name:"google_state", Value:"", Path:"/api/auth/google", HttpOnly:true, Secure:true, SameSite:http.SameSiteLaxMode, MaxAge:-1})
+	if stateErr != nil || stateCookie.Value == "" || subtle.ConstantTimeCompare([]byte(stateCookie.Value), []byte(r.URL.Query().Get("state"))) != 1 {
+		http.Redirect(w, r, "/sign-in?auth_error=invalid_state", http.StatusFound)
+		return
+	}
 	// Logen reports its own failures (user cancelled, tenant misconfigured) here.
 	if e := r.URL.Query().Get("error"); e != "" {
-		http.Redirect(w, r, "/?auth_error="+url.QueryEscape(e), http.StatusFound)
+		http.Redirect(w, r, "/sign-in?auth_error="+url.QueryEscape(e), http.StatusFound)
 		return
 	}
 	sessionID := r.URL.Query().Get("session_id")
 	if sessionID == "" {
-		http.Redirect(w, r, "/?auth_error=missing_session", http.StatusFound)
+		http.Redirect(w, r, "/sign-in?auth_error=missing_session", http.StatusFound)
 		return
 	}
 
 	profile, err := s.logen.Exchange(r.Context(), sessionID)
 	if err != nil {
 		log.Printf("[go-api] auth exchange failed: %v", err)
-		http.Redirect(w, r, "/?auth_error=exchange_failed", http.StatusFound)
+		http.Redirect(w, r, "/sign-in?auth_error=exchange_failed", http.StatusFound)
 		return
 	}
 
 	u, err := s.upsertGoogleUser(r.Context(), profile)
 	if err != nil {
 		log.Printf("[go-api] upsert google user failed: %v", err)
-		http.Redirect(w, r, "/?auth_error=exchange_failed", http.StatusFound)
+		code := "exchange_failed"
+		if errors.Is(err, errGoogleEmailConflict) { code = "email_conflict" }
+		http.Redirect(w, r, "/sign-in?auth_error="+code, http.StatusFound)
 		return
 	}
 
 	if err := s.startSession(w, r.Context(), u); err != nil {
 		log.Printf("[go-api] start session failed: %v", err)
-		http.Redirect(w, r, "/?auth_error=session_failed", http.StatusFound)
+		http.Redirect(w, r, "/sign-in?auth_error=session_failed", http.StatusFound)
 		return
 	}
-	http.Redirect(w, r, "/", http.StatusFound)
+	http.Redirect(w, r, "/account", http.StatusFound)
 }
 
-// upsertGoogleUser creates-or-finds the user for a Google profile. ON CONFLICT
-// keeps the existing row (and its id, which app tables FK to) and refreshes the
-// name — it must NOT touch password_hash, or signing in with Google would wipe the
-// password of someone who registered with one.
+var errGoogleEmailConflict = errors.New("existing email account requires email sign-in")
+
+// Bind users to the verified provider subject, never merge by email alone.
 func (s *Server) upsertGoogleUser(ctx context.Context, p LogenProfile) (User, error) {
 	var u User
-	err := s.pool.QueryRow(ctx,
-		`INSERT INTO users (email, name, password_hash)
-		 VALUES ($1, $2, $3)
-		 ON CONFLICT (email) DO UPDATE
-		   SET name = COALESCE(NULLIF(EXCLUDED.name, ''), users.name),
-		       updated_at = now()
-		 RETURNING id, email, name, role`,
-		normalizeEmail(p.Email), strings.TrimSpace(p.Name), googleOnlyPasswordHash,
-	).Scan(&u.ID, &u.Email, &u.Name, &u.Role)
-	return u, err
+	if p.GoogleID == "" || !validEmail(normalizeEmail(p.Email)) { return u, errors.New("invalid provider identity") }
+	tx, err := s.pool.Begin(ctx)
+	if err != nil { return u, err }
+	defer tx.Rollback(ctx)
+	// Serialize callbacks for the same provider identity.
+	if _, err = tx.Exec(ctx, `SELECT pg_advisory_xact_lock(hashtext($1))`, "google:"+p.GoogleID); err != nil { return u, err }
+	err = tx.QueryRow(ctx, `SELECT u.id, u.email, u.name, u.role FROM auth_identities i JOIN users u ON u.id=i.user_id WHERE i.provider='google' AND i.provider_subject=$1`, p.GoogleID).Scan(&u.ID,&u.Email,&u.Name,&u.Role)
+	if err == nil { return u, tx.Commit(ctx) }
+	if !errors.Is(err, pgx.ErrNoRows) { return u, err }
+	err = tx.QueryRow(ctx, `INSERT INTO users(email,name,password_hash) VALUES($1,$2,$3) RETURNING id,email,name,role`, normalizeEmail(p.Email), strings.TrimSpace(p.Name), googleOnlyPasswordHash).Scan(&u.ID,&u.Email,&u.Name,&u.Role)
+	if isUniqueViolation(err) { return u, errGoogleEmailConflict }
+	if err != nil { return u, err }
+	if _, err = tx.Exec(ctx, `INSERT INTO auth_identities(user_id,provider,provider_subject) VALUES($1,'google',$2)`,u.ID,p.GoogleID); err != nil { return u,err }
+	return u,tx.Commit(ctx)
 }
 
 // ── Sessions ──────────────────────────────────────────────────────────────────
@@ -271,7 +299,7 @@ func (s *Server) startSession(w http.ResponseWriter, ctx context.Context, u User
 	}
 	if _, err := s.pool.Exec(ctx,
 		`INSERT INTO sessions (token, user_id, expires_at) VALUES ($1, $2, $3)`,
-		token, u.ID, time.Now().Add(sessionTTL),
+		sessionDigest(token), u.ID, time.Now().Add(sessionTTL),
 	); err != nil {
 		return err
 	}
@@ -322,7 +350,7 @@ func (s *Server) currentUser(r *http.Request) (User, bool) {
 		SELECT u.id, u.email, u.name, u.role
 		FROM sessions s JOIN users u ON u.id = s.user_id
 		WHERE s.token = $1 AND s.expires_at > now()`,
-		c.Value,
+		sessionDigest(c.Value),
 	).Scan(&u.ID, &u.Email, &u.Name, &u.Role)
 	if err != nil {
 		return User{}, false
@@ -335,7 +363,8 @@ func (s *Server) currentUser(r *http.Request) (User, bool) {
 func normalizeEmail(e string) string { return strings.ToLower(strings.TrimSpace(e)) }
 
 func validEmail(e string) bool {
-	return len(e) >= 3 && strings.Contains(e, "@") && !strings.Contains(e, " ")
+	a, err := mail.ParseAddress(e)
+	return err == nil && a.Address == e && len(e) <= 254 && !strings.ContainsAny(e, "\r\n")
 }
 
 func isUniqueViolation(err error) bool {

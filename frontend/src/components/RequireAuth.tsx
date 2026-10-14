@@ -6,7 +6,7 @@ import { useAuth } from "../auth/AuthContext";
 // the visitor isn't signed in, otherwise renders the protected content.
 export function RequireAuth({ children }: { children: ReactNode }) {
   const { user, loading } = useAuth();
-  if (loading) return <p className="text-muted-foreground text-sm">Loading…</p>;
+  if (loading) return <p data-lg-key="69d5d511dd" className="text-muted-foreground text-sm">Loading…</p>;
   if (!user) return <Navigate to="/login" replace />;
   return <>{children}</>;
 }

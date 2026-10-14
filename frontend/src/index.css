@@ -147,9 +147,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ring); outline-
 .introduction p { color: var(--body); max-width: 440px; margin: 0; }
 .account-access h2 { font-size: 16px; font-weight: 600; line-height: 1.25; margin: 0 0 var(--space-lg); }
 .btn-google { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-md); min-height: 48px; padding: 14px 24px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 16px; font-weight: 500; line-height: 1.25; background: var(--card); color: var(--card-foreground); }
-.btn-google-mark { width: 20px; height: 20px; flex-shrink: 0; padding: 2px; background: var(--card); border-radius: 50%; }
-.btn-google.google-primary, .primary-action { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); width: 100%; min-height: 48px; }
-.btn-google.google-primary:hover, .primary-action:hover { background: var(--primary-active); border-color: var(--primary-active); }
+.btn-google-mark { width: 20px; height: 20px; flex-shrink: 0; }
+.btn-google.google-primary { width: 100%; color: var(--foreground); background: var(--background); border-color: var(--input); }
+.btn-google:hover { background: var(--secondary); }
+.primary-action { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); width: 100%; min-height: 48px; font-size: 16px; line-height: 1.25; padding: 14px 24px; }
+.primary-action:hover { background: var(--primary-active); border-color: var(--primary-active); }
 .text-link { display: inline-flex; align-items: center; gap: var(--space-sm); min-height: 44px; text-decoration: underline; text-underline-offset: 4px; font-size: 14px; line-height: 1.43; }
 .account-access > .text-link { margin-top: var(--space-sm); }
 .supporting { font-size: 14px; line-height: 1.43; color: var(--muted-foreground); margin: var(--space-base) 0 0; overflow-wrap: anywhere; }
@@ -163,6 +165,42 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ring); outline-
 .footer-year { color: var(--muted-foreground); margin-left: var(--space-sm); }
 .skip-link { position: fixed; top: 8px; left: 24px; transform: translateY(-150%); padding: 12px; background: var(--background); z-index: 100; }
 .skip-link:focus { transform: none; }
+.auth-page { padding-block: var(--space-xl); }
+.auth-column { max-width: 400px; margin-top: var(--space-xxl); }
+.auth-column h1 { font-size: var(--display-xl); font-weight: 700; line-height: 1.43; margin: 0; }
+.auth-google-full { width: 100%; margin-top: var(--space-xl); }
+.auth-divider { display: flex; align-items: center; gap: var(--space-base); margin-block: var(--space-lg); font-size: 14px; color: var(--muted-foreground); }
+.auth-divider::before, .auth-divider::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+.clearline-form { display: grid; gap: var(--space-lg); }
+.clearline-form input, .clearline-form textarea { min-height: 56px; padding: 14px 12px; font-size: 16px; line-height: 1.5; border-color: var(--input); box-shadow: none; }
+.clearline-form .supporting { margin: 0; }
+.form-error { color: var(--destructive); font-size: 14px; line-height: 1.43; }
+.auth-mode { color: var(--foreground); margin-top: var(--space-base); padding-inline: 0; min-height: 44px; }
+.account-topbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xl); padding-block: var(--space-sm); min-width: 0; }
+.account-current { font-weight: 600; font-size: 16px; }
+.account-topbar nav { display: flex; align-items: center; gap: var(--space-lg); margin-left: auto; }
+.sign-out { min-height: 44px; font-size: 14px; }
+.account-content { padding-block: var(--space-xxl); }
+.account-content h1 { font-size: var(--display-xl); line-height: 1.43; }
+.account-details { margin-top: var(--space-xl); max-width: 640px; }
+.account-details > div { display: grid; grid-template-columns: 160px minmax(0,1fr); gap: var(--space-lg); padding-block: var(--space-base); }
+.account-details dt { color: var(--muted-foreground); }
+.account-details dd { margin: 0; overflow-wrap: anywhere; }
+.account-status { margin-top: var(--space-xl); }
+.account-status h2 { font-size: var(--display-lg); line-height: 1.18; font-weight: 500; margin: 0 0 var(--space-base); }
+.account-status p { color: var(--body); margin: 0; }
+.account-status .text-link { margin-top: var(--space-sm); }
+.page-not-found { padding-block: var(--space-section); }
+.contact-main { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.5fr); gap: var(--space-section); padding-block: var(--space-section); }
+.contact-main > * { min-width: 0; }
+.contact-introduction h1 { font-size: var(--display-xl); font-weight: 700; line-height: 1.43; margin: 0 0 var(--space-base); }
+.contact-introduction p { color: var(--body); margin: 0; max-width: 320px; }
+.contact-main .clearline-form { max-width: 560px; }
+.contact-send { min-height: 48px; padding: 14px 24px; font-size: 16px; line-height: 1.25; }
+.contact-send:hover { background: var(--primary-active); }
+.contact-send + .supporting { margin-top: var(--space-base); }
+.contact-success h2 { font-size: var(--display-lg); line-height: 1.18; font-weight: 500; margin-bottom: var(--space-base); }
+.contact-success p { margin-bottom: var(--space-lg); color: var(--body); }
 @media (max-width: 640px) {
   .public-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 var(--space-lg); padding-block: var(--space-sm); }
   .public-header nav { grid-row: 2; grid-column: 1 / -1; gap: var(--space-lg); }
@@ -173,5 +211,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ring); outline-
   .home-help { display: block; padding-block: var(--space-lg); }
   .home-help .text-link { margin-top: var(--space-sm); }
   .public-footer { padding-block: var(--space-lg); }
+  .account-topbar { gap: var(--space-base); }
+  .account-topbar nav { width: 100%; margin: 0; }
+  .account-details > div { grid-template-columns: minmax(0,1fr); gap: var(--space-sm); }
+  .account-content { padding-block: var(--space-xl); }
+  .auth-column { margin-top: var(--space-xl); }
+  .contact-main { grid-template-columns: minmax(0,1fr); gap: var(--space-xl); padding-block: var(--space-xl); }
+  .contact-send { width: 100%; }
 }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0s !important; animation: none !important; scroll-behavior: auto !important; } }
 
