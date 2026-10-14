@@ -53,8 +53,6 @@ export function Login() {
         <h1>{mode === "login" ? "Sign in to Clearline." : "Create your account."}</h1>
         <p className="supporting">{mode === "login" ? "Your account, within reach." : "A clear place to begin."}</p>
         {oauthError && <p className="form-error" role="alert">{oauthError === "email_conflict" ? "Please sign in with email and password for your existing account." : "Google sign-in didn’t complete. Please try again or use email instead."}</p>}
-        <GoogleButton label="Continue with Google" className="auth-google-full" />
-        <div className="auth-divider"><span>or use email</span></div>
         <form id="auth-form" onSubmit={onSubmit} className="clearline-form" aria-busy={busy}>
           {mode === "register" && (
             <div data-lg-key="08d98c3646" className="grid gap-2">
@@ -97,6 +95,8 @@ export function Login() {
             {busy ? "Please wait…" : mode === "login" ? "Sign in" : "Create account"}
           </Button>
         </form>
+        <div className="auth-divider"><span>or</span></div>
+        <GoogleButton label="Continue with Google" className="auth-google-full" />
           <Button
             variant="link"
             className="auth-mode"

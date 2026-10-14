@@ -146,10 +146,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ring); outline-
 .introduction h1 { font-size: var(--display-xl); font-weight: 700; line-height: 1.43; letter-spacing: 0; margin: 0 0 var(--space-base); }
 .introduction p { color: var(--body); max-width: 440px; margin: 0; }
 .account-access h2 { font-size: 16px; font-weight: 600; line-height: 1.25; margin: 0 0 var(--space-lg); }
-.btn-google { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-md); min-height: 48px; padding: 14px 24px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 16px; font-weight: 500; line-height: 1.25; background: var(--card); color: var(--card-foreground); }
-.btn-google-mark { width: 20px; height: 20px; flex-shrink: 0; }
-.btn-google.google-primary { width: 100%; color: var(--foreground); background: var(--background); border-color: var(--input); }
-.btn-google:hover { background: var(--secondary); }
 .primary-action { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); width: 100%; min-height: 48px; font-size: 16px; line-height: 1.25; padding: 14px 24px; }
 .primary-action:hover { background: var(--primary-active); border-color: var(--primary-active); }
 .text-link { display: inline-flex; align-items: center; gap: var(--space-sm); min-height: 44px; text-decoration: underline; text-underline-offset: 4px; font-size: 14px; line-height: 1.43; }
@@ -168,7 +164,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ring); outline-
 .auth-page { padding-block: var(--space-xl); }
 .auth-column { max-width: 400px; margin-top: var(--space-xxl); }
 .auth-column h1 { font-size: var(--display-xl); font-weight: 700; line-height: 1.43; margin: 0; }
-.auth-google-full { width: 100%; margin-top: var(--space-xl); }
+.auth-google-full { width: 100%; }
 .auth-divider { display: flex; align-items: center; gap: var(--space-base); margin-block: var(--space-lg); font-size: 14px; color: var(--muted-foreground); }
 .auth-divider::before, .auth-divider::after { content: ""; flex: 1; height: 1px; background: var(--border); }
 .clearline-form { display: grid; gap: var(--space-lg); }
