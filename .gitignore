@@ -1,0 +1,40 @@
+# Go build artifacts — `go build` outputs a binary named after the module (`basic`);
+# it's a local, host-arch executable (a macOS build is useless on the Linux cloud, which
+# compiles its own in the container), so it must never be tracked.
+/basic
+/logen-go-react-starter
+/.bin/
+*.exe
+
+# Uploaded files (UPLOAD_DIR, see uploads.go) — user data, not source. The
+# server creates the directory at boot, so it never needs to be in the repo.
+/uploads/
+
+# Frontend deps & build output (reinstalled/rebuilt in the container)
+/frontend/node_modules/
+/frontend/dist/
+
+# The repo-root .gitignore ignores *.sql globally — but this template's SQL
+# migrations MUST be tracked (they define the schema). Re-include them.
+!migrations/
+!migrations/*.sql
+
+# Runtime state the app writes to its own workspace — never source, never synced.
+# A TRACKED file that the running app rewrites leaves the working tree permanently
+# dirty, and the cloud→desktop pull only fast-forwards a clean tree — so one
+# committed SQLite file silently blocks every future cloud change from arriving.
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+*.sqlite3-journal
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Logen drops the preview key-minter codemod here at sweep time. Ignore THAT FILE only —
+# `.logen/setup.sh` is a committed provisioning hook and must stay tracked.
+.logen/mint_keys.cjs

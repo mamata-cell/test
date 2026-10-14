@@ -1,0 +1,114 @@
+/* ──────────────────────────────────────────────────────────────────────────────
+   THIS APP'S DESIGN TOKENS — edit these freely.
+
+   Changing a value here restyles everything at once: buttons, focus rings, charts,
+   toasts and every shipped component read these. That is the intended way to give
+   the app its own look — do NOT write a parallel palette in component files.
+
+   The Tailwind v4 plumbing that turns these variables into utility classes lives
+   in `theme.css`, imported below. Keep that import: without it every token
+   utility (`bg-primary`, `text-foreground`, `border-border`, …) stops existing and
+   the app renders colourless while still compiling and serving normally.
+
+   Add this app's own CSS at the BOTTOM of this file.
+   ────────────────────────────────────────────────────────────────────────────── */
+
+@import "./theme.css";
+
+:root {
+  --radius: 0.75rem;
+
+  --background: #f6f7f9;
+  --foreground: #101828;
+
+  --card: #ffffff;
+  --card-foreground: #101828;
+  --popover: #ffffff;
+  --popover-foreground: #101828;
+
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+
+  --secondary: #f2f4f7;
+  --secondary-foreground: #101828;
+
+  --muted: #f2f4f7;
+  --muted-foreground: #667085;
+
+  --accent: #f2f4f7;
+  --accent-foreground: #101828;
+
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  --border: #e4e7ec;
+  --input: #e4e7ec;
+  --ring: #4f46e5;
+
+  /* Chart series. Recharts reads these through the shadcn Chart component, so a
+     dashboard inherits the app's palette instead of library defaults. */
+  --chart-1: #4f46e5;
+  --chart-2: #16a34a;
+  --chart-3: #d97706;
+  --chart-4: #2563eb;
+  --chart-5: #db2777;
+
+  --sidebar: #ffffff;
+  --sidebar-foreground: #101828;
+  --sidebar-primary: #4f46e5;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f2f4f7;
+  --sidebar-accent-foreground: #101828;
+  --sidebar-border: #e4e7ec;
+  --sidebar-ring: #4f46e5;
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.dark {
+  --background: #0b0d12;
+  --foreground: #f7f8f8;
+
+  --card: #14171f;
+  --card-foreground: #f7f8f8;
+  --popover: #14171f;
+  --popover-foreground: #f7f8f8;
+
+  --primary: #818cf8;
+  --primary-foreground: #0b0d12;
+
+  --secondary: #1c2029;
+  --secondary-foreground: #f7f8f8;
+
+  --muted: #1c2029;
+  --muted-foreground: #98a2b3;
+
+  --accent: #1c2029;
+  --accent-foreground: #f7f8f8;
+
+  --destructive: #f87171;
+  --destructive-foreground: #0b0d12;
+
+  --border: #262b36;
+  --input: #262b36;
+  --ring: #818cf8;
+
+  --chart-1: #818cf8;
+  --chart-2: #4ade80;
+  --chart-3: #fbbf24;
+  --chart-4: #60a5fa;
+  --chart-5: #f472b6;
+
+  --sidebar: #14171f;
+  --sidebar-foreground: #f7f8f8;
+  --sidebar-primary: #818cf8;
+  --sidebar-primary-foreground: #0b0d12;
+  --sidebar-accent: #1c2029;
+  --sidebar-accent-foreground: #f7f8f8;
+  --sidebar-border: #262b36;
+  --sidebar-ring: #818cf8;
+}
+
+/* Expose the tokens above as Tailwind utilities (`bg-background`, `text-muted-foreground`,
+   `rounded-lg`, …). Without this block the classes in the shipped components do not exist. */
+
