@@ -16,7 +16,7 @@
 @import "./theme.css";
 
 :root {
-  --radius: 32px;
+  --radius: 27px;
 
   --background: #ffffff;
   --foreground: #222222;
