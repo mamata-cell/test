@@ -19,7 +19,7 @@ export function App() {
       <Route element={<RequireAuth><Layout /></RequireAuth>}>
         <Route path="/account" element={<Account />} />
       </Route>
-      <Route path="*" element={<div className="site-container page-not-found"><h1>Page not found</h1><a className="text-link" href="/">Return Home</a></div>} />
+      <Route path="*" element={<div data-lg-key="5ba046afde" className="site-container page-not-found"><h1 data-lg-key="bc333f5292">Page not found</h1><a data-lg-key="a8b9f8881f" className="text-link" href="/">Return Home</a></div>} />
     </Routes>
   );
 }

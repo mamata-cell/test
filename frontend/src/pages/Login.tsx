@@ -43,19 +43,19 @@ export function Login() {
     }
   }
 
-  if (loading) return <main className="site-container auth-page"><p role="status">Checking your session…</p></main>;
+  if (loading) return <main data-lg-key="8faaa796a9" className="site-container auth-page"><p data-lg-key="4f7400bc00" role="status">Checking your session…</p></main>;
   if (user) return <Navigate to="/account" replace />;
   const oauthError = params.get("auth_error");
   return (
-    <main className="site-container auth-page" id="main-content">
+    <main data-lg-key="1229a622a2" className="site-container auth-page" id="main-content">
       <Link className="text-link" to="/">← Back to Home</Link>
-      <div className="auth-column">
-        <h1>{mode === "login" ? "Sign in to Clearline." : "Create your account."}</h1>
-        <p className="supporting">{mode === "login" ? "Your account, within reach." : "A clear place to begin."}</p>
-        {oauthError && <p className="form-error" role="alert">{oauthError === "email_conflict" ? "Please sign in with email and password for your existing account." : "Google sign-in didn’t complete. Please try again or use email instead."}</p>}
-        <div className="auth-divider"><span>or</span></div>
+      <div data-lg-key="44ef4aa1d5" className="auth-column">
+        <h1 data-lg-key="27ca0186a8">{mode === "login" ? "Sign in to Clearline." : "Create your account."}</h1>
+        <p data-lg-key="79a508d95a" className="supporting">{mode === "login" ? "Your account, within reach." : "A clear place to begin."}</p>
+        {oauthError && <p data-lg-key="ae13b384e2" className="form-error" role="alert">{oauthError === "email_conflict" ? "Please sign in with email and password for your existing account." : "Google sign-in didn’t complete. Please try again or use email instead."}</p>}
+        <div data-lg-key="a95edbf379" className="auth-divider"><span data-lg-key="91fb68946d">or</span></div>
         <GoogleButton label="Continue with Google" className="auth-google-full" />
-        <form id="auth-form" onSubmit={onSubmit} className="clearline-form" aria-busy={busy}>
+        <form data-lg-key="836f89edee" id="auth-form" onSubmit={onSubmit} className="clearline-form" aria-busy={busy}>
           {mode === "register" && (
             <div data-lg-key="08d98c3646" className="grid gap-2">
               <Label htmlFor="name">Name</Label>
@@ -90,9 +90,9 @@ export function Login() {
               onChange={(e) => setPassword(e.target.value)}
               aria-describedby="password-hint auth-error"
             />
-            <p id="password-hint" className="supporting">At least 8 characters.</p>
+            <p data-lg-key="bc7762b3c3" id="password-hint" className="supporting">At least 8 characters.</p>
           </div>
-          {error && <p id="auth-error" className="form-error" role="alert">{error}</p>}
+          {error && <p data-lg-key="c738c26a9e" id="auth-error" className="form-error" role="alert">{error}</p>}
           <Button className="primary-action" type="submit" disabled={busy}>
             {busy ? "Please wait…" : mode === "login" ? "Sign in" : "Create account"}
           </Button>
