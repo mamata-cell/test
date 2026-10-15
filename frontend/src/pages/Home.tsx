@@ -12,7 +12,7 @@ export function Home() {
       <main data-lg-key="c29e87a0be" id="main-content" className="site-container">
         <section data-lg-key="0730f658a7" className="home-arrival" aria-labelledby="arrival-title">
           <div data-lg-key="d8f04145af" className="introduction">
-            <h1 data-lg-key="2cfd22a280" id="arrival-title">A clear place to beg</h1>
+            <h1 data-lg-key="2cfd22a280" id="arrival-title">A clear place to</h1>
             <p data-lg-key="7449a9e1db">Create your Clearline account, return when you need it, and get in touch when you have a question.</p>
           </div>
           <div data-lg-key="c2cd1e4c80" className="account-access">
