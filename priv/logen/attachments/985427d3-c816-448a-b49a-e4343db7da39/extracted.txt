@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src https: data:; media-src https: data:; style-src 'unsafe-inline' https:; font-src https: data:; script-src 'none'; form-action 'none'; base-uri 'none'">
+<title>Fintech Moneta · Cards</title>
+<link rel="stylesheet" href="https://staging.logen.io/design-assets/7a17e6d7-7d49-47fb-8092-a3aa910b46c0/f195b015d4c949a2f5d504f7c3c098005f641743a735bf1bbc2694c49d5bc6ed.css">
+<link rel="stylesheet" href="https://staging.logen.io/design-assets/7a17e6d7-7d49-47fb-8092-a3aa910b46c0/e831ea6face07005b134af0a1b9af7e41a70827b962965536a8ee71c3b3c3caa.css">
+
+<style id="logen-page-css">
+</style>
+</head>
+<body>
+<div class="announcement">A clearer perspective on business money</div><div class="wrap"><header class="site-header"><a class="brand" href="/" data-design-page="13fffeba-8fd7-41f7-130f-8cb741e576d1"><em>◈</em> Moneta</a><nav aria-label="Main navigation"><a href="/accounts" data-design-page="7317aa83-8c09-1b25-ad2b-53281d9c5fc4">Accounts</a><a href="/cards" aria-current="page" data-design-page="1697ea08-91e3-413b-e178-2b72298058e5">Cards</a><a href="/company" data-design-page="f4ffb9f4-2eb0-26f9-d7d5-e2a34988c59d">Company</a></nav><a class="button header-cta" href="/accounts" data-design-page="7317aa83-8c09-1b25-ad2b-53281d9c5fc4">Explore <span aria-hidden="true">↗</span></a></header><main><section class="page-intro"><div class="eyebrow">A thoughtful card experience</div><h1>Built for the way<br/>your team works.</h1><p>A considered design for team spending, everyday purchases and a clearer view of activity.</p></section><section class="split"><div class="art-square"><img src="https://staging.logen.io/design-assets/7a17e6d7-7d49-47fb-8092-a3aa910b46c0/4ef5f841f6f58cce1df50bda4c8cc7afdfddf02e9f615f190c0d05b3aae6a6c4.svg" alt="Original illustration of two concept business cards"/></div><div><span class="pill">MONETA / TEAM</span><h2 style="margin-top:22px">The details.<br/>In your hands.</h2><p>Give each card a purpose and keep the whole team on the same page.</p><ul class="list"><li>Physical and virtual card concepts</li><li>Clear activity and spending categories</li><li>A unified team overview</li></ul><a class="button" href="/accounts" data-design-page="7317aa83-8c09-1b25-ad2b-53281d9c5fc4">View the account experience <span aria-hidden="true">↗</span></a></div></section><section class="section"><div class="banner"><div><h2>Designed for clarity.</h2><p>This is a static product concept. No card issuance, banking, deposits or payments are provided.</p></div><a class="button" href="/company" data-design-page="f4ffb9f4-2eb0-26f9-d7d5-e2a34988c59d">About Moneta <span aria-hidden="true">↗</span></a></div></section></main><footer class="site-footer"><a class="brand" href="/" data-design-page="13fffeba-8fd7-41f7-130f-8cb741e576d1">Moneta</a><span>Original static design template · All content is illustrative.</span><div class="footer-links"><a href="/accounts" data-design-page="7317aa83-8c09-1b25-ad2b-53281d9c5fc4">Accounts</a><a href="/cards" data-design-page="1697ea08-91e3-413b-e178-2b72298058e5">Cards</a></div></footer></div>
+
+</body>
+</html>
