@@ -16,24 +16,24 @@
 @import "./theme.css";
 
 :root {
-  --radius: 32px;
+  --radius: 16px;
 
-  --background: #ffffff;
-  --foreground: #222222;
+  --background: #f8f9f2;
+  --foreground: #162f39;
 
   --card: #ffffff;
-  --card-foreground: #222222;
+  --card-foreground: #162f39;
   --popover: #ffffff;
   --popover-foreground: #222222;
 
-  --primary: #e00b41;
+  --primary: #253f4b;
   --primary-foreground: #ffffff;
 
-  --secondary: #f7f7f7;
-  --secondary-foreground: #222222;
+  --secondary: #e2edb9;
+  --secondary-foreground: #162f39;
 
   --muted: #f7f7f7;
-  --muted-foreground: #6a6a6a;
+  --muted-foreground: #63767b;
 
   --accent: #f2f2f2;
   --accent-foreground: #222222;
@@ -41,7 +41,7 @@
   --destructive: #c13515;
   --destructive-foreground: #ffffff;
 
-  --border: #dddddd;
+  --border: #dce1d5;
   --input: #c1c1c1;
   --ring: #222222;
 
@@ -62,8 +62,8 @@
   --sidebar-border: #dddddd;
   --sidebar-ring: #222222;
 
-  --font-sans: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  --primary-active: #e00b41;
+  --font-sans: system-ui, -apple-system, sans-serif;
+  --primary-active: #183d49;
   --primary-disabled: #ffd1da;
   --body: #3f3f3f;
   --space-xs: 4px;

@@ -1,0 +1,1 @@
+:root{--accent:#253f4b;--soft:#e2edb9;--paper:#f8f9f2;--ink:#162f39;--muted:#63767b;--line:#dce1d5;--radius:16px;--font-display:var(--font-body)}h1,h2{font-weight:600;letter-spacing:-.065em}.hero .button:not(.secondary){background:#d7ec94;color:#183039}.dashboard .pill{background:#e2edb9}.bars i{background:#365a67}.announcement{background:#162f39;color:#e2edb9}

@@ -1,0 +1,118 @@
+/* Faithful transcription of the two stylesheets linked by the attached HTML.
+   Qualified to the Moneta pages so existing authenticated forms keep their wiring. */
+.moneta-site {
+  --font-body: system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-body);
+  --ink: #162f39;
+  --muted: #63767b;
+  --paper: #f8f9f2;
+  --surface: #fff;
+  --line: #dce1d5;
+  --accent: #253f4b;
+  --soft: #e2edb9;
+  --radius: 16px;
+  min-height: 100svh;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 15px/1.6 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+.moneta-site * { box-sizing: border-box; }
+.moneta-site a { text-decoration: none; }
+.moneta-site a:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
+.moneta-site img { display: block; width: 100%; height: auto; }
+.moneta-site h1, .moneta-site h2, .moneta-site h3, .moneta-site p { margin: 0; }
+.moneta-site h1, .moneta-site h2 { font-family: var(--font-display); font-weight: 600; letter-spacing: -.065em; line-height: 1.04; }
+.moneta-site h1 { font-size: clamp(44px,5.4vw,78px); }
+.moneta-site h2 { font-size: clamp(30px,3.5vw,46px); }
+.moneta-site h3 { font-size: 19px; line-height: 1.3; letter-spacing: -.025em; font-weight: 700; }
+.moneta-site p { color: var(--muted); }
+.moneta-site .wrap { max-width: 1220px; margin: auto; padding: 0 40px; }
+.moneta-site .announcement { background: #162f39; color: #e2edb9; text-align: center; padding: 9px 20px; font-size: 11px; letter-spacing: .04em; }
+.moneta-site .site-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 92px; border-bottom: 1px solid var(--line); }
+.moneta-site .brand { font-size: 25px; font-weight: 750; letter-spacing: -.06em; white-space: nowrap; }
+.moneta-site .brand em { font-style: normal; color: var(--accent); }
+.moneta-site nav { display: flex; align-items: center; gap: 28px; font-size: 13px; }
+.moneta-site nav a { padding: 8px 0; }
+.moneta-site nav a[aria-current=page] { color: var(--accent); box-shadow: 0 2px var(--accent); }
+.moneta-site .button { display: inline-flex; align-items: center; justify-content: center; gap: 20px; background: var(--accent); color: white; padding: 14px 23px; border-radius: 8px; font-size: 13px; font-weight: 650; line-height: 1.4; transition: transform .18s, opacity .18s; }
+.moneta-site .button:hover { transform: translateY(-2px); opacity: .88; }
+.moneta-site .button.secondary { color: var(--ink); background: transparent; border: 1px solid var(--line); }
+.moneta-site .header-cta { font-size: 12px; padding: 11px 18px; }
+.moneta-site .hero { padding: 66px 0 72px; display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: 64px; }
+.moneta-site .eyebrow { text-transform: uppercase; font-size: 10px; font-weight: 700; letter-spacing: .16em; margin-bottom: 22px; color: var(--accent); }
+.moneta-site .hero p { font-size: 16px; max-width: 420px; margin: 24px 0 28px; }
+.moneta-site .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.moneta-site .hero .button:not(.secondary) { background: #d7ec94; color: #183039; }
+.moneta-site .fine { font-size: 11px; margin-top: 22px; color: var(--muted); }
+.moneta-site .section { padding: 56px 0; border-top: 1px solid var(--line); }
+.moneta-site .section-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 30px; }
+.moneta-site .text-link { display: inline; min-height: 0; font-size: 13px; font-weight: 650; line-height: inherit; color: var(--accent); }
+.moneta-site .grid { display: grid; gap: 22px; grid-template-columns: repeat(3,1fr); }
+.moneta-site .card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 28px; }
+.moneta-site .card p { font-size: 13px; margin: 12px 0 18px; }
+.moneta-site .card-icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px; background: var(--soft); color: var(--accent); font-size: 22px; margin-bottom: 25px; }
+.moneta-site .pill { display: inline-block; border-radius: 30px; background: var(--soft); color: var(--accent); padding: 5px 12px; font-size: 10px; font-weight: 650; }
+.moneta-site .trust { display: flex; gap: 28px; justify-content: space-between; align-items: center; flex-wrap: wrap; padding: 26px 0; border-top: 1px solid var(--line); font-size: 13px; }
+.moneta-site .trust span { font-weight: 650; letter-spacing: -.02em; }
+.moneta-site .trust small { font-size: 10px; color: var(--muted); font-weight: 400; }
+.moneta-site .banner { background: var(--soft); border-radius: var(--radius); padding: 44px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+.moneta-site .banner p { margin-top: 16px; max-width: 510px; }
+.moneta-site .site-footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 32px 0 40px; border-top: 1px solid var(--line); font-size: 11px; color: var(--muted); }
+.moneta-site .footer-links { display: flex; gap: 20px; }
+.moneta-site .page-intro { max-width: 750px; padding: 62px 0 48px; }
+.moneta-site .page-intro h1 { font-size: clamp(40px,5vw,66px); }
+.moneta-site .page-intro p { margin-top: 22px; max-width: 570px; }
+.moneta-site .split { display: grid; grid-template-columns: 1fr 1fr; gap: 54px; align-items: center; }
+.moneta-site .split h2 { margin-bottom: 22px; }
+.moneta-site .split p { margin-bottom: 20px; }
+.moneta-site .list { list-style: none; padding: 0; margin: 22px 0; }
+.moneta-site .list li { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.moneta-site .list li::before { content: '✓'; margin-right: 14px; color: var(--accent); }
+.moneta-site .dashboard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: 0 24px 70px #0000000d; transform: rotate(-2deg); }
+.moneta-site .dash-top { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 18px; font-size: 12px; }
+.moneta-site .dash-top b { font-size: 15px; }
+.moneta-site .dash-label { font-size: 10px; color: var(--muted); margin: 24px 0 8px; }
+.moneta-site .dash-metric { font-size: 36px; font-weight: 650; letter-spacing: -.05em; }
+.moneta-site .bars { height: 130px; display: flex; align-items: end; gap: 10px; padding-top: 18px; }
+.moneta-site .bars i { flex: 1; background: #365a67; border-radius: 5px 5px 0 0; opacity: .7; }
+.moneta-site .bars i:nth-child(even) { background: var(--soft); opacity: 1; }
+.moneta-site .dash-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 15px 0; border-bottom: 1px solid var(--line); font-size: 12px; }
+.moneta-site .dash-row small { color: var(--muted); }
+.moneta-site .art-square { border-radius: var(--radius); overflow: hidden; background: var(--soft); }
+.moneta-site .art-square img { aspect-ratio: 1.15; object-fit: cover; }
+.moneta-site .mini-label { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); padding-top: 10px; }
+.moneta-site .hero > *, .moneta-site .split > *, .moneta-site .grid > * { min-width: 0; }
+.moneta-site .moneta-skip { position: fixed; left: 16px; top: 8px; z-index: 100; transform: translateY(-200%); padding: 12px; color: var(--ink); background: var(--paper); }
+.moneta-site .moneta-skip:focus { transform: none; }
+@media (max-width:900px) {
+  .moneta-site .wrap { padding: 0 26px; }
+  .moneta-site .hero { gap: 30px; }
+  .moneta-site nav { gap: 16px; }
+  .moneta-site .grid { gap: 14px; }
+  .moneta-site .card { padding: 22px; }
+  .moneta-site .header-cta { display: none; }
+}
+@media (max-width:640px) {
+  .moneta-site .wrap { padding: 0 21px; }
+  .moneta-site .site-header { min-height: 76px; gap: 12px; flex-wrap: wrap; padding: 17px 0; }
+  .moneta-site .brand { font-size: 23px; }
+  .moneta-site nav { gap: 17px; font-size: 11px; flex-wrap: wrap; }
+  .moneta-site .hero { padding: 42px 0; grid-template-columns: 1fr; gap: 34px; }
+  .moneta-site .hero p { font-size: 14px; }
+  .moneta-site .grid, .moneta-site .split { grid-template-columns: 1fr; }
+  .moneta-site .section { padding: 38px 0; }
+  .moneta-site .section-head { align-items: start; flex-direction: column; gap: 16px; }
+  .moneta-site .trust { gap: 18px; font-size: 12px; }
+  .moneta-site .banner { padding: 28px; display: block; }
+  .moneta-site .banner .button { margin-top: 24px; }
+  .moneta-site .site-footer { align-items: start; flex-direction: column; }
+  .moneta-site .page-intro { padding: 42px 0 32px; }
+  .moneta-site .dashboard { transform: none; }
+  .moneta-site .card { padding: 24px; }
+  .moneta-site .split { gap: 28px; }
+  .moneta-site .announcement { font-size: 10px; }
+  .moneta-site .hero h1 { max-width: 480px; }
+  .moneta-site .footer-links { flex-wrap: wrap; }
+}

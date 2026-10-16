@@ -50,7 +50,7 @@ export function Login() {
     <main data-lg-key="1229a622a2" className="site-container auth-page" id="main-content">
       <Link className="text-link" to="/">← Back to Home</Link>
       <div data-lg-key="44ef4aa1d5" className="auth-column">
-        <h1 data-lg-key="27ca0186a8">{mode === "login" ? "Sign in to Clearline." : "Create your account."}</h1>
+        <h1 data-lg-key="27ca0186a8">{mode === "login" ? "Sign in to Moneta." : "Create your account."}</h1>
         <p data-lg-key="79a508d95a" className="supporting">{mode === "login" ? "Your account, within reach." : "A clear place to begin."}</p>
         {oauthError && <p data-lg-key="ae13b384e2" className="form-error" role="alert">{oauthError === "email_conflict" ? "Please sign in with email and password for your existing account." : "Google sign-in didn’t complete. Please try again or use email instead."}</p>}
         <div data-lg-key="a95edbf379" className="auth-divider"><span data-lg-key="91fb68946d">or</span></div>

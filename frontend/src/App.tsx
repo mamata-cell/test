@@ -1,5 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
+import { Accounts } from "./pages/Accounts";
+import { Cards } from "./pages/Cards";
+import { Company } from "./pages/Company";
 import { Login } from "./pages/Login";
 import { Account } from "./pages/Account";
 import { Contact } from "./pages/Contact";
@@ -13,6 +16,13 @@ export function App() {
           header, so nesting it in the app shell stacks two headers on `/`. Every
           AUTHENTICATED route belongs inside <Layout> below. */}
       <Route path="/" element={<Home />} />
+      <Route path="/accounts" element={<Accounts />} />
+      <Route path="/cards" element={<Cards />} />
+      <Route path="/company" element={<Company />} />
+      <Route path="/index.html" element={<Navigate to="/" replace />} />
+      <Route path="/accounts/index.html" element={<Navigate to="/accounts" replace />} />
+      <Route path="/cards/index.html" element={<Navigate to="/cards" replace />} />
+      <Route path="/company/index.html" element={<Navigate to="/company" replace />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/sign-in" element={<Login />} />
       <Route path="/login" element={<Navigate to="/sign-in" replace />} />

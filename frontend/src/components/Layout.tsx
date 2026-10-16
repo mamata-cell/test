@@ -21,7 +21,7 @@ export function Layout() {
   }
 
   return (
-    <AppShell pattern="topbar-main" variant="inset" className="account-shell" topbar={<div data-lg-key="5d4f92e613" className="site-container account-topbar"><Link className="wordmark" to="/">Clearline<span data-lg-key="24d0a235c6">.</span></Link><Link className="account-current" to="/account" aria-current="page">Account</Link><nav data-lg-key="6ee94e61e5" aria-label="Account navigation"><Link className="text-link" to="/contact">Contact</Link><Button variant="secondary" className="sign-out" disabled={busy} onClick={signOut}>{busy ? "Signing out…" : "Sign out"}</Button></nav></div>}>
+    <AppShell pattern="topbar-main" variant="inset" className="account-shell" topbar={<div data-lg-key="5d4f92e613" className="site-container account-topbar"><Link className="wordmark" to="/">◈ Moneta</Link><Link className="account-current" to="/account" aria-current="page">Account</Link><nav data-lg-key="6ee94e61e5" aria-label="Account navigation"><Link className="text-link" to="/contact">Contact</Link><Button variant="secondary" className="sign-out" disabled={busy} onClick={signOut}>{busy ? "Signing out…" : "Sign out"}</Button></nav></div>}>
       <a data-lg-key="67c56965f8" className="skip-link" href="#main-content">Skip to content</a>
       <Outlet />
     </AppShell>
