@@ -3,20 +3,20 @@ import { MonetaAction, MonetaBanner, MonetaCards, MonetaDashboard, MonetaLayout 
 export function Home() {
   return (
     <MonetaLayout title="Home">
-      <section className="hero">
-        <div>
-          <div className="eyebrow">Business money, in perspective</div>
-          <h1>A clear view.<br />A confident next step.</h1>
-          <p>One considered home for your business finances. See the everyday details and keep the bigger picture in sight.</p>
-          <div className="actions">
+      <section data-lg-key="b65575203d" className="hero">
+        <div data-lg-key="9f35690d8e">
+          <div data-lg-key="a203981090" className="eyebrow">Business money, in perspective</div>
+          <h1 data-lg-key="1d0779b55e">A clear view.<br data-lg-key="95aa239b25" />A confident next step.</h1>
+          <p data-lg-key="56014de30b">One considered home for your business finances. See the everyday details and keep the bigger picture in sight.</p>
+          <div data-lg-key="5dbcd89eb9" className="actions">
             <MonetaAction to="/accounts">Explore accounts</MonetaAction>
             <MonetaAction to="/company" secondary>Meet Moneta</MonetaAction>
           </div>
-          <div className="fine">Fictional financial product · all figures are illustrative.</div>
+          <div data-lg-key="2df6f28693" className="fine">Fictional financial product · all figures are illustrative.</div>
         </div>
         <MonetaDashboard />
       </section>
-      <div className="trust"><small>MADE FOR THE EVERYDAY</small><span>Your business</span><span>Your priorities</span><span>Your bigger picture</span></div>
+      <div data-lg-key="9d5e1a85be" className="trust"><small data-lg-key="9380a134af">MADE FOR THE EVERYDAY</small><span data-lg-key="b402c20694">Your business</span><span data-lg-key="d7174ab495">Your priorities</span><span data-lg-key="3c31acb66c">Your bigger picture</span></div>
       <MonetaCards title="Clarity, from every angle." items={[
         {icon:"◈",title:"Accounts with purpose",description:"Give everyday spending, future plans and team expenses a clear place.",to:"/accounts",label:"Explore accounts"},
         {icon:"▰",title:"Spend with intention",description:"A considered card experience with team visibility at its heart.",to:"/cards",label:"See card design"},
